@@ -1,15 +1,66 @@
 1. Faça uma consulta que retorne todos os vendedores do estado do Paraná.
-2. Faça uma consulta que retorne todos os vendedores do estado do Paraná ou da cidade de sarandi.
+SELECT * FROM sellers WHERE seller_state = 'PR' 
+
+2. Faça uma consulta que retorne todos os vendedores do estado do Paraná ou da cidade do rio de janeiro.
+SELECT seller_id, seller_state, seller_city 
+FROM sellers 
+WHERE seller_state = 'PR'
+OR LOWER(seller_city) LIKE '%rio de janeiro%'
+ORDER BY seller_city DESC
+
 3. Faça uma consulta que retorne todos os pedidos que o preço esteja entre R\$ 45 e R\$ 125.
+SELECT order_id, payment_value
+FROM order_payments
+WHERE payment_value BETWEEN 45 AND 125
+ORDER BY payment_value 
+
 4. Faça uma consulta que retorne todos os pedidos calculando o valor total do pedido (preço + frete).
-5. Faça uma consulta que retorne a data mínima e máxima de limite de entrega 
+SELECT *, (price + freight_value) AS soma 
+FROM order_items
+
+5. Faça uma consulta que retorne o prazo limite mínimo e máximo de entrega 
+-- Para Fazer
+
 6. Faça uma consulta que retorne os 10 vendedores que mais realizaram vendas.
+SELECT seller_id, COUNT(DISTINCT order_id) AS qtd
+FROM order_items 
+GROUP BY seller_id
+ORDER BY qtd DESC 
+
 7. Faça uma consulta que retorne os tipos distintos de tipo de pagamento.
+SELECT DISTINCT payment_type FROM order_payments
+
+
 8. Faça uma consulta que retorne a quantidade de pedidos agrupados por tipo de pagamento.
+SELECT payment_type, COUNT(order_id) as qtd
+FROM order_payments
+GROUP BY payment_type 
+ORDER BY qtd
+
+
 9. Faça uma consulta que retorne a soma dos valores do pedidos agrupados por tipo de pagamento.
+SELECT payment_type, ROUND(CAST(SUM(payment_value) as numeric), 2) AS total 
+FROM order_payments
+GROUP BY payment_type 
+ORDER BY total
+
+
 10. Faça uma consulta que retorne as 10 cidades com mais clientes.
 11. Faça uma consulta que crie uma nova coluna concatenando as colunas de cidade e estado separando por hífen.
 12. Faça uma consulta que retorne a quantidade de ordens agrupadas por status do pedido
 13. Faça uma consuta que calcule a diferença de tempo entre a compra e aprovação da realização do pedido.
 14. Faça uma consulta que retorne todos as reviews que tenham score maior ou igual a 3 e que não tenha conteúdo vazio no comentário da mensagem.
 15. Faça uma consulta que crie uma nova coluna com os meses de as datas de criação das reviews
+
+
+
+EXTRA:
+
+- Faça uma consulta que retorne os 10 vendedores que mais vendem 
+itens por venda em média.
+
+- Faça uma consulta que retorne os 10 vendedores 
+com maior ticket médio.
+
+- Faça uma consulta que retorne os 10 vendedores 
+com menor ticket médio.
