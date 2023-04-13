@@ -93,6 +93,7 @@ SELECT * FROM order_reviews
 WHERE review_score > (SELECT AVG(review_score) FROM order_reviews) 
 AND review_comment_message NOTNULL
 
+
 15. Faça uma consulta que crie uma nova coluna com os meses de as datas de criação das reviews
 SELECT COUNT(order_id) as qtd, EXTRACT(MONTH FROM DATE(review_creation_date)) as mes 
 FROM order_reviews 
@@ -127,6 +128,7 @@ data limite para entrega.
 
 
 consulta de geolocalização(Lat e Log) dos clientes com a quantidade em cada localização. 
+
 
 Qual o produto mais querido da base.
 Justifique. 
